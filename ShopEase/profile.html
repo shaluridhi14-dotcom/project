@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopEase.com/Profile</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI';
+    }
+
+    body {
+      background: #f5f7fa;
+    }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: #d0d5e1;
+      color: rgb(0, 0, 0);
+      padding: 20px;
+      font-weight: bold;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color:#01165c;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .sidebar ul li:hover {
+      background: #374151;
+      color:#ffffff;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile-header img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .btn {
+      background: #2563eb;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #1e40af;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .order-box {
+      padding: 15px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+    }
+
+    .logout {
+      background: #dc2626;
+    }
+.extra {
+      display: none;
+    }
+   
+.input-group{
+            margin-bottom: 15px;
+        }
+        .input-group label{
+            font-size: 16px;
+            color:#000000;
+            font-weight: bold;
+        }
+        .input-group select{
+          width:100%;
+            padding:10px;
+            margin-top:5px;
+            border-radius: 8px;
+            border:1px solid black;
+            outline:none;
+            transition:0.3s;
+        }
+        .input-group input{
+            width:100%;
+            padding:10px;
+            margin-top:5px;
+            border-radius: 8px;
+            border:1px solid black;
+            outline:none;
+            transition:0.3s;
+        }
+        .input-group input:focus{
+            border-width: 3px;
+        }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>ShopEase</h2>
+    <ul>
+      <li onclick="home()">Home </li>
+      <li onclick="order()">My Orders</li>
+      <li onclick="wishlist()">Wishlist</li>
+      <li onclick="cart()">My Cart</li>
+      <li class="logout" onclick="logout()">Logout</li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+
+    <!-- Profile Info -->
+    <div class="card">
+      <div class="profile-header">
+           <img id="profileImage" src="profilepic.jpg" alt="Profile Image">
+<input type="file" id="image" style="display:none;">
+        <div>
+          <h2>Name: <span id="name"></span></h2>
+    <p>Email: <span id="email"></span></p>
+    <p>Mobile: <span id="mobile"></span></p>
+
+    <!-- EDIT INPUTS (hidden initially) -->
+    <div id="editFields" style="display:none;">
+      <input type="text" id="editName" placeholder="Name">
+      <input type="text" id="editMobile" placeholder="Mobile">
+    </div>
+
+  <!-- EXTRA -->
+  <div class="extra" id="extra">
+    <div class="input-group">
+<label>Gender</label><br>
+    <select id="gender">
+      <option value="">Gender</option>
+      <option>Male</option>
+      <option>Female</option>
+    </select></div>
+<div class="input-group">
+            <label>Language</label>
+        <input type="text" id="language" placeholder="language">
+        </div>
+    <div class="input-group">
+            <label>Occupation</label>
+        <input type="text" id="occupation" placeholder="occupation">
+        </div>
+   <div class="input-group">
+            <label>City</label>
+        <input type="text" id="city" placeholder="City">
+        </div>
+        <div class="input-group">
+            <label>Address</label>
+        <input type="text" id="address" placeholder="Address">
+        </div>
+    <div class="input-group">
+            <label>State</label>
+        <input type="text" id="state" placeholder="State">
+        </div>
+    <div class="input-group">
+            <label>Country</label>
+        <input type="text" id="country" placeholder="country">
+        </div>
+    <div class="input-group">
+            <label>Pincode</label>
+        <input type="text" id="pincode" placeholder="pincode">
+        </div>
+
+  </div>
+
+<div>
+  <button onclick="editProfile()"class="btn">Edit Profile</button>
+  <button onclick="saveProfile()"class="btn">Save</button>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+ 
+</div>
+<script>
+
+// LOAD USER
+let user = JSON.parse(localStorage.getItem("user"));
+
+if (!user) {
+  alert("Please login first!");
+  window.location.href = "register.html";
+}
+
+// SHOW PROFILE DATA
+function loadProfile() {
+  user = JSON.parse(localStorage.getItem("user"));
+
+  document.getElementById("name").innerText = user.name;
+  document.getElementById("email").innerText = user.email;
+  document.getElementById("mobile").innerText = user.mobile || "";
+
+  document.getElementById("profileImage").src =
+    user.profile_image
+      ? "http://localhost:3000/uploads/" + user.profile_image
+      : "profilepic.jpg";
+}
+
+loadProfile();
+
+
+// EDIT BUTTON
+function editProfile() {
+
+  document.getElementById("extra").style.display = "block";
+  document.getElementById("editFields").style.display = "block";
+
+  // AUTO FILL
+  document.getElementById("editName").value = user.name;
+  document.getElementById("editMobile").value = user.mobile || "";
+
+  document.getElementById("gender").value = user.gender || "";
+  document.getElementById("language").value = user.language || "";
+  document.getElementById("occupation").value = user.occupation || "";
+  document.getElementById("address").value = user.address || "";
+  document.getElementById("city").value = user.city || "";
+  document.getElementById("state").value = user.state || "";
+  document.getElementById("country").value = user.country || "";
+  document.getElementById("pincode").value = user.pincode || "";
+
+  // IMAGE CLICK
+  document.getElementById("profileImage").onclick = () => {
+    document.getElementById("image").click();
+  };
+}
+
+
+// IMAGE PREVIEW
+document.getElementById("image").addEventListener("change", function () {
+  const file = this.files[0];
+  if (file) {
+    document.getElementById("profileImage").src = URL.createObjectURL(file);
+  }
+});
+
+
+// SAVE PROFILE
+function saveProfile() {
+
+  const formData = new FormData();
+
+  formData.append("id", user.id);
+  formData.append("name", document.getElementById("editName").value || "");
+  formData.append("mobile", document.getElementById("editMobile").value || "");
+  formData.append("gender", document.getElementById("gender").value || "");
+  formData.append("language", document.getElementById("language").value || "");
+  formData.append("occupation", document.getElementById("occupation").value || "");
+  formData.append("address", document.getElementById("address").value || "");
+  formData.append("city", document.getElementById("city").value || "");
+  formData.append("state", document.getElementById("state").value || "");
+  formData.append("country", document.getElementById("country").value || "");
+  formData.append("pincode", document.getElementById("pincode").value || "");
+
+  const imageFile = document.getElementById("image").files[0];
+  if (imageFile) {
+    formData.append("image", imageFile);
+  }
+
+  fetch("http://localhost:3000/update-profile", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    alert(data.message);
+
+    // UPDATE LOCAL STORAGE
+    const updatedUser = {
+      ...user,
+      name: document.getElementById("editName").value,
+      mobile: document.getElementById("editMobile").value,
+      gender: document.getElementById("gender").value,
+      language: document.getElementById("language").value,
+      occupation: document.getElementById("occupation").value,
+      address: document.getElementById("address").value,
+      city: document.getElementById("city").value,
+      state: document.getElementById("state").value,
+      country: document.getElementById("country").value,
+      pincode: document.getElementById("pincode").value
+    };
+
+    // IMAGE NAME FROM BACKEND
+    if (data.image) {
+  updatedUser.profile_image = data.image;
+}
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
+    loadProfile(); // UI update
+    document.getElementById("extra").style.display = "none";
+    document.getElementById("editFields").style.display = "none";
+  });
+}
+
+
+// LOGOUT
+function logout() {
+  const user = localStorage.getItem("user");
+
+  if (!user) {
+    alert("You are not logged in!");
+    return;
+  }
+
+  if (confirm("Are you sure you want to logout?")) {
+    localStorage.removeItem("user");
+    alert("Logout successful!");
+    window.location.href = "register.html";
+  }
+}
+
+function home(){
+  window.location.href="index.html";
+}
+
+function wishlist(){
+  window.location.href="wishlist.html";
+}
+
+function cart(){
+  window.location.href="cart.html";
+}
+function order(){
+  window.location.href="orders.html";
+}
+</script>
+</body>
+</html>

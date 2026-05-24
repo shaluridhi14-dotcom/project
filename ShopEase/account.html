@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase.com/CreateAccount</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        body{
+            height:100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: #e7e7e7;
+        }
+        .form-container{
+            background-color: #d8d6d6;
+            padding:20px;
+            border-radius: 12px;
+            width:400px;
+            border:3px solid rgb(126,122,122);
+             align-items: center;
+             margin-left:430px;
+        }
+        .form-container h2{
+            text-align: center;
+            color: #02246e;
+            align-items: center;
+        }
+        .nav-logo{
+           align-items: center;
+           margin-left:20px;
+        }
+        .input-group{
+            margin-bottom: 15px;
+        }
+        .input-group label{
+            font-size: 16px;
+            color:#000000;
+            font-weight: bold;
+        }
+        .input-group input{
+            width:100%;
+            padding:10px;
+            margin-top:5px;
+            border-radius: 8px;
+            border:1px solid black;
+            outline:none;
+            transition:0.3s;
+        }
+        .input-group input:focus{
+            border-width: 3px;
+        }
+        .login-btn{
+            width:100%;
+            padding:10px;
+            border:none;
+            border-radius:8px;
+            background:orange;
+            color:black;
+            font-size:16px;
+            cursor:pointer;
+            transition: 0.3s;
+        }
+        .login-btn:hover{
+            background-color: rgb(250, 189, 35);
+        }
+        .extra-links{
+            text-align:center;
+            margin-top:15px;
+            font-size:14px;
+        }
+        .extra-links a{
+            text-decoration: none;
+            color:#002c8a;
+        }
+        .extra-links a:hover{
+            text-decoration:underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-logo">
+            <img src="shopeasy.png"height="100px"width="200px">
+        </div>
+   <div class="form-container">
+    <h2>Create Account</h2>
+    <form id="form">
+        <div class="input-group">
+            <label>username</label>
+        <input type="text" id="name" placeholder="Username" required>
+        </div>
+        <div class="input-group">
+            <label>Email</label>
+        <input type="email" id="email" placeholder="Email Address" required>
+        </div>
+        <div class="input-group">
+            <label>Mobile number</label>
+        <input type="text" id="mobile" placeholder="mobile number" maxlength="10" required>
+        </div>
+        <div class="input-group">
+            <label>password</label>
+        <input type="password" id="password" placeholder="Password" required>
+        </div>
+        <button class="login-btn" type="submit" id="login_btn">Create Account</button>
+    </form>
+    <p class="extra-links">Already have an account? <a href="register.html">Login here</a></p>
+    <p class="extra-links"><a href="index.html"class="home"> Back to Home</a></p>
+</div> 
+<script>
+    document.getElementById("form").addEventListener("submit",async(e)=>{
+        e.preventDefault();
+        const data={
+            name:document.getElementById("name").value,
+            email:document.getElementById("email").value,
+            mobile:document.getElementById("mobile").value,
+            password:document.getElementById("password").value
+        };
+        const res=await fetch("http://localhost:3000/register",{
+            method:"POST",
+            headers: {
+    "Content-Type": "application/json"
+},
+            body: JSON.stringify(data)
+        });
+        const result=await res.text();
+        alert(result);
+    });
+</script>
+</body>
+</html>

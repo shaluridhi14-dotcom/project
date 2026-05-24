@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Wishlist</title>
+
+<style>
+body{
+    background:#d4d4d4;
+    font-family:Arial;
+}
+
+.heading{
+    text-align:center;
+    margin:20px;
+    color:#02246e;
+}
+
+.grid{
+    width:90%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+}
+
+.card img{
+    width:100%;
+}
+
+.price{
+    color:green;
+    font-weight:bold;
+}
+
+.removeitem{
+    background:red;
+    color:white;
+    border:none;
+    padding:8px;
+    border-radius:5px;
+}
+.addtocart{
+        background-color: #02246e;
+        color:white;
+        font-weight: bold;
+        border:none;
+        padding:10px;
+        width:100%;
+        border-radius:5px;
+        cursor:pointer;
+        margin-top:10px;
+       }
+       .addtocart:hover{
+        background-color: #2632bc;
+       }
+       .empty-cart{
+    grid-column:1/-1;
+    text-align:center;
+    background:#fff;
+    padding:40px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+.empty-cart p{margin:10px 0 20px;color:#555;}
+.empty-cart button{
+    background:#02246e;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:6px;
+    cursor:pointer;
+}
+</style>
+
+</head>
+<body>
+
+<h1 class="heading">My Wishlist ❤️</h1>
+
+<div class="grid" id="wishlist"></div>
+
+<script>
+const userId = localStorage.getItem("user_id");
+
+if(!userId){
+    alert("Login first");
+    window.location.href="login.html";
+}
+
+fetch(`http://localhost:3000/wishlist/${userId}`)
+.then(res=>res.json())
+.then(data=>{
+
+    if(data.length === 0){
+        document.getElementById("wishlist").innerHTML = '<div class="empty-cart"><h2>Wishlist is Empty ❤️</h2><p>Your wishlist is empty, click below to start shopping.</p><button onclick="goShopping()">Go Shopping</button></div>'
+        return;
+    }
+
+    let html = "";
+
+    data.forEach(p=>{
+        html += `
+        <div class="card">
+            <img src="${p.image}">
+            <h3>${p.name}</h3>
+            <p class="price">Rs.${p.price}</p>
+            <button onclick="removeItem(${p.id})"class="removeitem">Remove</button>
+            <button onclick="addtocart(${p.id})" class="addtocart">Add to Cart</button>
+        </div>
+        `;
+    });
+
+    document.getElementById("wishlist").innerHTML = html;
+});
+
+function removeItem(id){
+
+    fetch("http://localhost:3000/wishlist/remove",{
+        method:"DELETE",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            user_id:userId,
+            product_id:id
+        })
+    })
+    .then(()=>location.reload());
+}
+
+function addtocart(id){
+
+    fetch("http://localhost:3000/cart/add",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            user_id:userId,
+            product_id:id,
+            message:"Added to cart"
+        })
+    })
+    .then(() => alert("Added to Cart 🛒"))
+    .then(()=>location.reload());
+}
+function goShopping(){
+     window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

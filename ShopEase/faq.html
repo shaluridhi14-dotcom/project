@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopEase.com/FAQ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .faq-item {
+      background: #fff;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .faq-question {
+      padding: 18px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question:hover {
+      background: #f0f4ff;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 20px;
+      background: #fafafa;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .faq-answer p {
+      margin: 15px 0;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      padding: 0 20px 15px;
+    }
+
+    .icon {
+      font-size: 20px;
+      transition: transform 0.3s;
+    }
+
+    .faq-item.active .icon {
+      transform: rotate(45deg);
+    }
+</style>
+</head>
+
+<body>
+
+  <div class="faq-container">
+    <h1>ShopEase FAQs</h1>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        How do I place an order?
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>Browse products, add items to your cart, and proceed to checkout. Enter your details and complete the payment.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        Do I need an account to order?
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>No, but creating an account helps you track orders and manage your wishlist easily.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        How can I track my order?
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>You can track your order from the “My Orders” section or via email/SMS updates.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        What payment methods are accepted?
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>We accept Credit/Debit Cards, UPI, Net Banking, and Cash on Delivery.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        How long does delivery take?
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>Delivery usually takes 3–7 business days depending on your location.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        What is your return policy?
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>You can return products within 7 days if they are unused and in original packaging.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        How will I get my refund?
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>Refunds are processed within 5–7 working days to your original payment method.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        Can I cancel my order?
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>Yes, you can cancel your order before it is shipped.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let question= document.querySelectorAll(".faq-question");
+    question.forEach(function(q)
+    {
+        q.onclick=function(){
+            let parent=this.parentElement;
+            document.querySelectorAll(".faq-item").forEach(function(item){
+                if(item !== parent){
+                    item.classList.remove("active");
+                }
+            });
+            parent.classList.toggle("active");
+        }
+    });
+  </script>
+</body>
+</html>
