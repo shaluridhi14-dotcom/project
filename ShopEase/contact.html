@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopEase.com/Contact us</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafb;
+      color: #333;
+    }
+
+    header {
+      background-color: rgb(3, 22, 189);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      margin-bottom: 20px;
+      color: #1c026f;
+    }
+
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    form textarea {
+      resize: none;
+      height: 120px;
+    }
+
+    .btn {
+      background: #02246e;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #05269b;
+    }
+
+    .info p {
+      margin: 10px 0;
+    }
+
+    .faq {
+      margin-top: 20px;
+    }
+
+    .faq h3 {
+      margin-bottom: 10px;
+    }
+
+    .faq p {
+      font-size: 14px;
+      color: #555;
+    }
+    .socialmedia{
+        text-align: center;
+        margin-top:30px;
+       
+    }
+    .icons{
+        display:flex;
+        justify-content: center;
+        gap:25px;
+    }
+    .icons a{
+        width:50px;
+        height:50px;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        border-radius: 20px;
+        box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+        text-decoration: none;
+        color:white;
+  transition: 0.3s;
+    }
+    .icons a:hover {
+  transform: translateY(-10px) scale(1.3);
+}
+.insta { background: linear-gradient(45deg,#feda75,#d62976,#962fbf);
+cursor: pointer;  }
+.fb{ background: #0a6def; 
+cursor: pointer; }
+.twt { background: #1da1f2;
+cursor: pointer;  }
+.whtsp { background: #10db5b; 
+cursor: pointer; }
+.yt {background:red;
+cursor: pointer; }
+
+    .footer {
+            text-align: center;
+            padding: 15px;
+            background: #002c8a;
+            color: white;
+            margin-top: 40px;
+        }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Contact ShopEase</h1>
+  <p>We’re here to help! Reach out anytime and we’ll happily answer your questions.</p>
+</header>
+
+<div class="container">
+
+  <!-- Contact Form -->
+  <div class="card">
+    <h2>Send Us a Message</h2>
+    <form id="feedbackForm">
+      <input type="text"id="name" placeholder="Your Name" required>
+      <input type="email"id="email" placeholder="Your Email" required>
+      <select id="subject"required>
+        <option value="">Select Subject</option>
+        <option>Order Issue</option>
+        <option>Return/Refund</option>
+        <option>Payment issue</option>
+        <option>General Inquiry</option>
+      </select>
+      <textarea id="message" placeholder="Write your message..." required></textarea>
+      <button class="btn">Send Message</button>
+    </form>
+  </div>
+
+  <!-- Contact Info -->
+  <div class="card info">
+    <h2>Contact Information</h2>
+    <p> <i class="fa-regular fa-envelope"></i>support@shopease.com</p>
+    <p> <i class="fa-solid fa-phone"></i>+91 96941 54836</p>
+    <p><i class="fa-solid fa-location-crosshairs"></i>India</p>
+
+    <div class="faq">
+      <h3>Quick Help</h3>
+      <p><strong>Where is my order?</strong><br>Track your order from your account dashboard.</p>
+      <p><strong>How to return a product?</strong><br>Go to orders and select return option.</p>
+      <p><strong>Payment issues?</strong><br>Contact us immediately for support.</p>
+    </div>
+    <div class="socialmedia">
+        <h3>Follow us :</h3>
+        <div class="icons">
+        <a onclick="openInsta()" class="insta"><i class="fab fa-instagram"></i></a>
+        <a onclick="openfb()" class="fb"><i class="fab fa-facebook"></i></a>
+        <a onclick="opentwitter()" class="twt"><i class="fab fa-twitter"></i></a>
+        <a onclick="openwhatsapp()" class="whtsp"><i class="fab fa-whatsapp"></i></a>
+          <a onclick="openyt()" class="yt"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  © 2026 ShopEase | We usually respond within 24 hours.
+</div>
+<script>
+document.getElementById("feedbackForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        subject: document.getElementById("subject").value,
+        message: document.getElementById("message").value
+    };
+
+    const res = await fetch("http://localhost:3000/submit-feedback", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    // ✅ ALERT SHOW
+    alert(result.message);
+
+    document.getElementById("feedbackForm").reset();
+});
+function openInsta() {
+    alert("Opening Instagram...");
+    window.open("https://www.instagram.com", "_blank");
+}
+function openwhatsapp() {
+    alert("Opening WhatsApp...");
+    window.open("https://www.whatsapp.com", "_blank");
+}
+function openfb() {
+    alert("Opening FaceBook...");
+    window.open("https://www.facebook.com", "_blank");
+}
+function opentwitter() {
+    alert("Opening Twitter...");
+    window.open("https://www.twitter.com", "_blank");
+}
+function openyt() {
+    alert("Opening YouTube...");
+    window.open("https://www.youtube.com", "_blank");
+}
+</script>
+</body>
+</html>

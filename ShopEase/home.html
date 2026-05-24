@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase.com/beauty&PersonalCare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+       body{
+            background-color: black;
+        }
+        .heading{
+            margin-left: 480px;
+            color: white;
+        }
+        .product-container{
+             display:grid;
+        grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+        gap:20px;
+        }
+       .product-card{
+        position:relative;
+        background:#ffffff;
+        padding:15px;
+        border-radius:10px;
+       transition:transform 0.3s;
+       }
+       .product-card:hover{
+        transform:scale(1.05);
+       }
+       .product-card img{
+        width: 100%;
+        border-radius: 10px;
+       }
+       .product-card h3{
+        margin:10px;
+       }
+       .price{
+        color:#2e7d32;
+        font-weight: bold;
+       }
+       button{
+        background-color: #02246e;
+        color:white;
+        font-weight: bold;
+        border:none;
+        padding:10px;
+        width:100%;
+        border-radius:5px;
+        cursor:pointer;
+        margin-top:10px;
+       }
+       button:hover{
+        background-color: #2632bc;
+       }
+       .wishlist{
+        position:absolute;
+        top:10px;
+        right:15px;
+        font-size:22px;
+        cursor:pointer;
+        color:#999;
+        transition:0.3s;
+       }
+       .wishlist:active{
+        color:red;
+
+       }
+       .wishlist:hover{
+        transform:scale(1.2);
+       }
+    </style>
+</head>
+<body>
+   <section class="shop">
+    <h1 class="heading">Our Home Essentials</h1>
+    <div class="product-container">
+        <div class="product-card">
+            <span class="wishlist"data-id="21"><i class="fas fa-heart"></i></span>
+            <img src="painting.webp">
+            <h3>Beautiful painting</h3>
+            <p class="price">Rs.999</p>
+            <button data-id="21"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="22"><i class="fas fa-heart"></i></span>
+            <img src="photoframe.jpeg">
+            <h3>Cute Photo Frames</h3>
+            <p class="price">Rs.599</p>
+            <button data-id="22"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="23"><i class="fas fa-heart"></i></span>
+            <img src="clock.jpg">
+            <h3>Amazing wall clock</h3>
+            <p class="price">Rs.745</p>
+            <button data-id="23"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="24"><i class="fas fa-heart"></i></span>
+            <img src="coffee table.jpeg">
+            <h3>Aesthetic Coffee table</h3>
+            <p class="price">Rs.4996</p>
+            <button data-id="24"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="25"><i class="fas fa-heart"></i></span>
+            <img src="curtains.webp">
+            <h3>An aesthetic curtains pair</h3>
+            <p class="price">Rs.1395</p>
+            <button data-id="25"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="26"><i class="fas fa-heart"></i></span>
+            <img src="cushion.jpeg">
+            <h3>Elegant cushion pair</h3>
+            <p class="price">Rs.739</p>
+            <button data-id="26"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="27"><i class="fas fa-heart"></i></span>
+            <img src="flower vase.jpeg">
+            <h3>flourish Flower Vase</h3>
+            <p class="price">Rs.659</p>
+            <button data-id="27"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="28"><i class="fas fa-heart"></i></span>
+            <img src="lamps.avif">
+            <h3>Beautiful Lamp</h3>
+            <p class="price">Rs.1469</p>
+            <button data-id="28"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="29"><i class="fas fa-heart"></i></span>
+            <img src="mirror.jpeg">
+            <h3>Aesthetic Mirror</h3>
+            <p class="price">Rs.1799</p>
+            <button data-id="29"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="30"><i class="fas fa-heart"></i></span>
+            <img src="wallhanging.jpeg">
+            <h3>Attractive Wall hanging</h3>
+            <p class="price">Rs.499</p>
+            <button data-id="30"class="add-cart">Add to Cart</button>
+        </div>
+    </div>
+   </section>
+   <script>
+const userId = localStorage.getItem("user_id");
+
+
+function initWishlist() {
+    if (!userId) return;
+
+    const hearts = document.querySelectorAll(".wishlist");
+
+    hearts.forEach(heart => {
+        const productId = heart.getAttribute("data-id");
+
+        fetch(`http://localhost:3000/wishlist/check/${userId}/${productId}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.exists) {
+                heart.style.color = "red";
+            } else {
+                heart.style.color = "#999";
+            }
+        });
+    });
+}
+
+
+document.querySelectorAll(".wishlist").forEach(heart => {
+    heart.addEventListener("click", () => {
+
+        if (!userId) {
+            alert("Login first");
+            return;
+        }
+
+        const productId = heart.getAttribute("data-id");
+
+        
+        if (heart.style.color === "red") {
+
+            fetch("http://localhost:3000/wishlist/remove", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    product_id: productId
+                })
+            })
+            .then(res => res.json())
+            .then(() => {
+                heart.style.color = "#999";
+            });
+
+        } else {
+           
+            fetch("http://localhost:3000/wishlist/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    product_id: productId
+                })
+            })
+            .then(res => res.json())
+            .then(() => {
+                heart.style.color = "red";
+            });
+        }
+    });
+});
+
+initWishlist();
+
+document.querySelectorAll(".add-cart").forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        if (!userId) {
+            alert("Login first");
+            return;
+        }
+
+        const productId = btn.getAttribute("data-id");
+
+        fetch("http://localhost:3000/cart/add", {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({
+                user_id: userId,
+                product_id: productId
+            })
+        })
+        .then(res => res.json())
+        .then(() => alert("Added to Cart 🛒"));
+    });
+});
+</script>
+</body>
+</html>

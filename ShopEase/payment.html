@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Checkout</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#f5f5f5;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+/* sections */
+.box{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+}
+
+/* bill */
+.item{
+    display:flex;
+    justify-content:space-between;
+    margin:8px 0;
+}
+
+/* buttons */
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.proceed{
+    width:100%;
+    background:#28a745;
+    color:white;
+    padding:15px;
+    font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- 🧾 BILL -->
+    <div class="box">
+        <h2>Order Summary</h2>
+        <div id="bill"></div>
+        <h3 id="total"></h3>
+    </div>
+
+    <!-- 👤 USER DETAILS -->
+    <div class="box">
+        <h2>Delivery Details</h2>
+        <p id="userDetails"></p>
+        <p id="addressText"></p>
+        <button onclick="changeAddress()">Change Address</button>
+    </div>
+
+    <!-- 💳 PAYMENT -->
+    <div class="box">
+        <h2>Payment Method</h2>
+
+        <label><input type="radio" name="pay" value="COD"> Cash on Delivery</label><br>
+        <label><input type="radio" name="pay" value="UPI"> UPI</label><br>
+        <label><input type="radio" name="pay" value="CARD"> Card</label>
+    </div>
+
+    <!-- ✅ PROCEED -->
+    <button class="proceed" onclick="placeOrder()">Proceed to Pay</button>
+
+</div>
+
+<script>
+const userId = localStorage.getItem("user_id");
+let userData = {}; // ✅ store user data
+
+// 🧾 LOAD CART
+fetch(`http://localhost:3000/cart/${userId}`)
+.then(res=>res.json())
+.then(data=>{
+    let total = 0;
+
+    document.getElementById("bill").innerHTML = data.map(item=>{
+        let sub = item.price * item.quantity;
+        total += sub;
+
+        return `
+        <div class="item">
+            <span>${item.name} x ${item.quantity}</span>
+            <span>₹${sub}</span>
+        </div>`;
+    }).join("");
+
+    document.getElementById("total").innerText = "Total: ₹" + total;
+});
+
+// 👤 LOAD USER DETAILS
+fetch(`http://localhost:3000/user/${userId}`)
+.then(res=>res.json())
+.then(user=>{
+    userData = user; // ✅ IMPORTANT FIX
+
+    document.getElementById("userDetails").innerHTML = `
+        ${user.name} <br>
+        ${user.email} <br>
+        ${user.mobile} <br>
+        ${user.address}
+    `;
+});
+
+
+// CHANGE ADDRESS
+function changeAddress() {
+  window.location.href = "profile.html";
+}
+
+
+// 💳 PLACE ORDER
+function placeOrder(){
+
+    const paymentMethod = document.querySelector('input[name="pay"]:checked');
+
+    if(!paymentMethod){
+        alert("Please select payment method!");
+        return;
+    }
+
+    fetch(`http://localhost:3000/cart/${userId}`)
+    .then(res => res.json())
+    .then(cartItems => {
+
+        if(cartItems.length === 0){
+            alert("Cart is empty!");
+            return;
+        }
+
+        // ✅ use userData instead of localStorage
+        const name = userData.name;
+        const email = userData.email;
+        const phone = userData.mobile;
+        const address = userData.address;
+
+        let total = 0;
+        cartItems.forEach(item => {
+            total += item.price * item.quantity;
+        });
+
+        // ✅ PLACE ORDER
+        return fetch("http://localhost:3000/order", {
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({
+                user_id: userId,
+                name,
+                email,
+                phone,
+                address,
+                cart: cartItems,
+                total
+            })
+        });
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if(!data || data.message !== "Order placed successfully"){
+            alert("Order failed ❌");
+            return;
+        }
+
+        alert("Order placed successfully ✅");
+
+        // ✅ CLEAR CART
+        return fetch(`http://localhost:3000/cart/clear/${userId}`, {
+            method:"DELETE"
+        });
+    })
+    .then(() => {
+        window.location.href = "success.html";
+    })
+    .catch(err => {
+        console.log(err);
+        alert("Something went wrong ❌");
+    });
+}
+</script>
+</body>
+</html>

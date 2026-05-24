@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopEase Cart</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+body{background:#e3e3e3;}
+
+.cart-heading{text-align:center;margin:20px;}
+
+.cart-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    background:#fff;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+.incdec{
+    padding:5px;
+    color:white;
+    background-color:#02246e ;
+    font-size: 14px;
+    font-weight: bold;
+    margin:5px;
+}
+.incdec:hover{
+    background-color:#0447d6 ;
+}
+.removeitem{
+     padding:5px;
+    color:rgb(255, 255, 255);
+    background-color: #f93f23;
+    font-size: 14px;
+    font-weight: bold;
+    margin:5px;
+}
+.removeitem:hover{
+    background-color: #d54029;
+}
+.card img{width:100%;border-radius:10px;}
+.price{color:green;font-weight:bold;}
+
+.bill-box{
+    margin:20px;
+    padding:20px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+    display:none; /* 👈 IMPORTANT */
+}
+
+.bill-item{
+    display:flex;
+    justify-content:space-between;
+    margin:8px 0;
+}
+
+.bill-buttons{
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+}
+
+.buy-btn{
+    background:#28a745;
+    width:30%;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-left: 40%;
+    font-weight: bold;
+}
+.buy-btn:hover{background:#218838;}
+
+.more-btn{
+    flex:1;
+    background:#02246e;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight: bold;
+}
+.more-btn:hover{background:#0f40aa;}
+
+.empty-cart{
+    grid-column:1/-1;
+    text-align:center;
+    background:#fff;
+    padding:40px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+.empty-cart p{margin:10px 0 20px;color:#555;}
+.empty-cart button{
+    background:#02246e;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1 class="cart-heading">My Cart 🛒</h1>
+
+<div id="cart-container" class="cart-grid"></div>
+
+<div class="bill-box" id="bill-box">
+    <h2>Order Summary</h2>
+    <div id="bill-items"></div>
+    <hr>
+    <h3 id="total"></h3>
+
+    <div class="bill-buttons">
+        <button class="buy-btn" onclick="buyNow()">Buy Now</button>
+        <button class="more-btn" onclick="goShopping()">More</button>
+    </div>
+</div>
+
+<script>
+const userId = localStorage.getItem("user_id");
+
+function loadCart(){
+    fetch(`http://localhost:3000/cart/${userId}`)
+    .then(res => res.json())
+    .then(data => {
+
+        const container = document.getElementById("cart-container");
+        const billBox = document.getElementById("bill-box");
+        const billItems = document.getElementById("bill-items");
+        const totalEl = document.getElementById("total");
+
+        if(data.length === 0){
+            container.innerHTML = `
+                <div class="empty-cart">
+                    <h2>Cart is Empty 🛒</h2>
+                    <p>Your cart is empty, click below to start shopping.</p>
+                    <button onclick="goShopping()">Go Shopping</button>
+                </div>
+            `;
+            billBox.style.display = "none";
+            return;
+        }
+
+        billBox.style.display = "block";
+
+        let total = 0;
+
+    
+        container.innerHTML = data.map(item => {
+            let subtotal = item.price * item.quantity;
+            total += subtotal;
+
+            return `
+            <div class="card">
+                <img src="${item.image}">
+                <h3>${item.name}</h3>
+                <p class="price">₹${item.price}</p>
+                <p>Qty: ${item.quantity}</p>
+
+                <button onclick="inc(${item.product_id})" class="incdec">+</button>
+                <button onclick="dec(${item.product_id})"class="incdec">-</button>
+                <button onclick="removeItem(${item.product_id})" class="removeitem">Remove</button>
+            </div>
+            `;
+        }).join("");
+
+        
+        billItems.innerHTML = data.map(item => {
+            let subtotal = item.price * item.quantity;
+
+            return `
+            <div class="bill-item">
+                <span>${item.name} x ${item.quantity}</span>
+                <span>₹${subtotal}</span>
+            </div>
+            `;
+        }).join("");
+
+        totalEl.innerText = "Total: ₹" + total;
+    });
+}
+
+
+function inc(id){
+    fetch("http://localhost:3000/cart/increase",{
+        method:"PUT",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({user_id:userId, product_id:id})
+    }).then(()=>loadCart());
+}
+
+
+function dec(id){
+    fetch("http://localhost:3000/cart/decrease",{
+        method:"PUT",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({user_id:userId, product_id:id})
+    }).then(()=>loadCart());
+}
+
+// ❌
+function removeItem(id){
+    fetch("http://localhost:3000/cart/remove",{
+        method:"DELETE",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({user_id:userId, product_id:id})
+    }).then(()=>loadCart());
+}
+
+function buyNow(){
+    window.location.href = "payment.html"; 
+}
+
+function goShopping(){
+    window.location.href = "index.html";
+}
+
+loadCart();
+</script>
+
+</body>
+</html>

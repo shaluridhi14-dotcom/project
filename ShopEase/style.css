@@ -1,0 +1,411 @@
+*{
+    margin:0;
+    padding:0;
+    border:border-box;
+    font-family: Arial;
+}
+
+.navbar{
+height: 70px;
+background-color:#000000;
+color:white;
+display: flex;
+justify-content:space-evenly;
+}
+.nav-logo{
+    height:80px;
+    width:100px;
+}
+.logo{
+background-image: url("shopeaselogoo.jpeg");
+height: 60px;
+width:120px;
+background-size: cover;
+align-items:center; 
+}
+.border{
+    border:1px solid transparent;
+}
+.border:hover{
+    border:1px solid white;
+}
+.nav-address{
+    height:60px;
+}
+.add-first{
+    color:#cccccc;
+    font-size:0.85rem;
+    margin-left: 25px;
+    margin-top:10px;
+}
+.add-second{
+    font-size:1rem;
+    margin-left:5px;
+    align-items: center;
+    font-weight: bold;
+}
+.add-icon{
+    display: flex;
+    align-items:center;
+    margin-left:5px;
+}
+.nav-search{
+    display:flex;
+    margin-left:10px;
+}
+.search-input
+{
+    width:500px;
+    height:35px;
+    font-size:18px;
+   margin-top:10px;
+}
+.search-input:hover{
+    border:2px solid orange;
+}
+.search-icon{
+background-color: orange;
+height:40px;
+width:45px;
+border-top-right-radius: 5px;
+border-bottom-right-radius:5px;
+margin-top:10px;
+}
+.search-icon:hover{
+    background-color: rgb(252, 185, 69);
+}
+.nav-signin{
+    border:1px solid transparent;
+   margin-top:10px;
+    height:50px;
+}
+.nav-signin:hover{
+     border:1px solid white;
+}
+.text-first{
+    font-size:18px;
+    font-weight: bold;
+   
+}
+.text-second:hover{
+    text-decoration-line:underline;
+}
+.text-second{
+    font-weight: bold;
+    font-size:14px;
+    text-decoration: none;
+    color: #ffffff;
+}
+.cart i{
+    margin-top:10px;
+    font-size:20px;
+    color:#ffffff;
+    
+}
+.cart{
+    font: size 20px;
+    font-weight:bold;
+    height:50px;
+}
+.panel{
+    height:40px;
+    background-color:#02246e;
+    align-items: center;
+    font-size:16px;
+    display: flex;
+}
+.panel-all
+{
+    display: flex;
+    color:rgb(255, 255, 255);
+    padding-left:15px;
+    align-items: center;
+}
+.panel-all i{
+    padding-right:5px;
+}
+.panel-all a{
+    color:rgb(255, 255, 255);
+    align-items: center;
+    padding-left:5px;
+}
+.panel-all a:hover{
+    text-decoration: underline;
+}
+.panel-options{
+    color:rgb(255, 255, 255);
+    display:flex;
+    padding: 10px;
+}
+.panel-options a{
+padding-left:60px;
+color:rgb(255, 255, 255);
+font-size: 16px;
+}
+.panel-options a:hover{
+    text-decoration: underline;
+}
+.panel-options i{
+    font-size:13px;
+    color:#ffffff;
+    padding:5px;
+    
+}
+.image{
+   background-image: url("amazon_shop.png");
+   transition-duration:2s;
+   background-size: cover;
+   height:300px;
+   animation:picture 10s step-start 2s infinite;
+   display: flex;
+   justify-content: center;
+   align-items: flex-end;
+   
+}
+@keyframes picture {
+    0%{background-image: url("amazon_shop.png");}
+    25%{background-image:url("amazon_cloth.jpg");}
+    50%{background-image: url("amazon_toys.jpg");}
+    75%{background-image: url("amazon_kitchen.jpg");}
+    100%{background-image: url("amazon_gift.jpg");}
+    }
+    
+    a{
+        text-decoration: none;
+        color:rgb(1, 115, 221)
+    }
+    .box{
+        border:7px solid rgb(200, 199, 199);
+        height: 300px;
+        width:30%;
+        background-color:rgb(255, 255, 255);
+        padding:15px 0px 15px;
+    }
+    /* .box:hover{
+        border:2px solid gray;
+    } */
+    .shop-section{
+        display:flex;
+        justify-content:space-evenly;
+        background-color:rgb(210, 209, 209);
+    }
+    .seemore{
+        color:rgb(0, 140, 205);
+        font-size:18px;
+        margin:25px;
+    }
+    .seemore:hover{
+        text-decoration:underline;
+    }
+    .beauty_img{
+        background-image: url("beauty_logo.jpg");
+        height:250px;
+        width:80%;
+        background-size: cover;
+        margin-left:28px;
+        }
+    .home_img
+    {
+        background-image: url("home_logo.avif");
+        height:250px;
+        background-size: cover;
+        width:80%;
+        margin-left:28px;
+    }
+    .kitchen_img{
+        background-image: url("kitchen_logo.avif");
+        height:250px;
+        background-size: cover;
+        width:80%;
+        margin-left:28px;
+    }
+    .smartphone_img{
+        background-image: url("smart_logo.avif");
+        height:250px;
+        background-size: cover;
+        width:80%;
+        margin-left:28px;
+    }
+    .Fashion_img{
+        background-image: url("fashion_logo.avif");
+        height:250px;
+        background-size: cover;
+        width:80%;
+        margin-left:28px;
+    }
+    .shoes_img{
+        background-image: url("shoes_logo.avif");
+        height:250px;
+        background-size: cover;
+        width:80%;
+        margin-left:28px;
+    }
+    .bag_img{
+        background-image: url("bag_logo.avif");
+        height:250px;
+        background-size: cover;
+        width:80%;
+        margin-left:28px;
+    }
+    .earing_img{
+        background-image: url("earings_logo.avif");
+        height:250px;
+        background-size: cover;
+        width:80%;
+        margin-left:28px;
+    }
+    .heading2{
+        margin-left:20px;
+    }
+    .shop-section2{
+        display:flex;
+        justify-content:space-evenly;
+        background-color:white;
+       
+    }
+    .show-section{
+        height: 300px;
+        width:100%;
+        background-color:rgb(221, 221, 221);
+        padding:15px 0px 15px;
+        margin-top: 10px;
+        align-items: center;
+    }
+    .image-section{
+        height: 220px;
+        width:95%;
+        background-color:rgb(255, 252, 252);
+        padding:15px 0px 15px;
+        display:flex;
+        justify-content: space-evenly;
+        margin-top: 10px;
+        margin-left: 20px;
+    }
+    .heading3{
+        text-align: center;
+        margin-top: 5px;
+    }
+    
+    .signinlast{
+        margin-top:20px;
+        border:1px solid rgb(233, 227, 227);
+    }
+    
+    .signbutton{
+        background-color: rgb(251, 148, 45);
+        color:#0c0c0c;
+        height:35px;
+        width:200px;
+        border:none;
+        border-radius: 30px;
+        align-items: center;
+        margin-left: 550px;
+        margin-top: 15px;
+        font-weight: bold;
+        cursor:pointer;
+    }
+    .signbutton a{
+        text-decoration: none;
+        color:#000000;
+    }
+    .signbutton:hover{
+        background-color:rgb(250, 189, 35) ;
+        text-decoration: underline;
+    }
+    .signpara{
+        font-size:12px;
+        margin-left:590px;
+        margin-top:10px;
+    }
+    .signpara a{
+        text-decoration:underline;
+    }
+    footer{
+          margin-top: 15px;
+    }
+    
+    .foot-panel2{
+        background-color:#02246e;
+        height:300px;
+        color:rgb(0, 0, 0);
+        display: flex;
+        justify-content: space-evenly;
+        }
+    .foot-panel2 a{
+        color:rgb(255, 255, 255);
+         display:block;
+         margin-top: 10px;
+         font-size: 13px;
+    }
+    .foot-panel2 p{
+        color:rgb(255, 253, 253);
+        font-weight: bold;
+         margin-top: 40px;
+         margin-bottom: 30px;
+          font-size: 15px;
+    }
+
+    .foot-panel2 a:hover{
+        text-decoration: underline;
+    }
+    .foot-panel3{
+        background-color:#000000;
+        height:80px;
+        width:100%;
+        background-size: cover;
+        align-items:center; 
+        display: flex;
+       justify-content: space-evenly;
+       border:1px solid rgb(32, 32, 34);
+
+}
+.foot-logo{
+ background-image: url("shopeaselogoo.jpeg");
+ height: 65px;
+width:150px;
+background-size: cover;
+  align-items:center;
+justify-content: space-evenly;
+}
+.privacy-para{
+    background-color:#000000;
+    height:50px;
+    width:100%;
+    display:flex;
+    justify-content: space-evenly;
+    
+    }
+.privacy-para a{
+    color:white;
+    font-size: 16px;
+   align-items: center;
+   display: flex;
+   
+}
+.privacy-para a:hover{
+    text-decoration: underline;
+}
+    .copyright{
+        background-color:#02246e;
+        height:50px;
+        width:100%;
+        color:white;
+        font-size:12px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .searchbar button{
+        background-color: #02246e;
+        color:white;
+        font-weight: bold;
+        border:none;
+        padding:10px;
+        width:100%;
+        border-radius:5px;
+        cursor:pointer;
+        margin-top:10px;
+       }
+       .searchbar button:hover{
+         background-color: #2632bc;
+       }

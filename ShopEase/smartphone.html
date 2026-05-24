@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase.com/beauty&PersonalCare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body{
+            background-color: black;
+        }
+        .heading{
+            margin-left: 480px;
+            color: white;
+        }
+        .product-container{
+             display:grid;
+        grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+        gap:20px;
+        }
+       .product-card{
+        position:relative;
+        background:#ffffff;
+        padding:15px;
+        border-radius:10px;
+       transition:transform 0.3s;
+       }
+       .product-card:hover{
+        transform:scale(1.05);
+       }
+       .product-card img{
+        width: 100%;
+        border-radius: 10px;
+       }
+       .product-card h3{
+        margin:10px;
+       }
+       .price{
+        color:#2e7d32;
+        font-weight: bold;
+       }
+       button{
+        background-color: #02246e;
+        color:white;
+        font-weight: bold;
+        border:none;
+        padding:10px;
+        width:100%;
+        border-radius:5px;
+        cursor:pointer;
+        margin-top:10px;
+       }
+       button:hover{
+        background-color: #2632bc;
+       }
+       .wishlist{
+        position:absolute;
+        top:10px;
+        right:15px;
+        font-size:22px;
+        cursor:pointer;
+        color:#999;
+        transition:0.3s;
+       }
+       .wishlist:active{
+        color:red;
+
+       }
+       .wishlist:hover{
+        transform:scale(1.2);
+       }
+    </style>
+</head>
+<body>
+   <section class="shop">
+    <h1 class="heading">Our Electronic Gadgets</h1>
+    <div class="product-container">
+        <div class="product-card">
+            <span class="wishlist"data-id="31"><i class="fas fa-heart"></i></span>
+            <img src="ac.jpeg">
+            <h3>Best Air conditioner</h3>
+            <p class="price">Rs.15990</p>
+            <button data-id="31"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="32"><i class="fas fa-heart"></i></span>
+            <img src="airfryer.jpg">
+            <h3>Mordern Air Fryer</h3>
+            <p class="price">Rs.10299</p>
+            <button data-id="32"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="33"><i class="fas fa-heart"></i></span>
+            <img src="charger.jpeg">
+            <h3>Affordable chargers</h3>
+            <p class="price">Rs.999</p>
+            <button data-id="33"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="34"><i class="fas fa-heart"></i></span>
+            <img src="earbuds.jpeg">
+            <h3>Trending Earpods</h3>
+            <p class="price">Rs.1499</p>
+            <button data-id="34"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="35"><i class="fas fa-heart"></i></span>
+            <img src="headphones.jpeg">
+            <h3>Best Headphones</h3>
+            <p class="price">Rs.6999</p>
+            <button data-id="35"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="36"><i class="fas fa-heart"></i></span>
+            <img src="laptop.jpeg">
+            <h3>Best Laptop</h3>
+            <p class="price">Rs.50899</p>
+            <button data-id="36"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="37"><i class="fas fa-heart"></i></span>
+            <img src="phone.webp">
+            <h3>Mobile phones</h3>
+            <p class="price">Rs.16559</p>
+            <button data-id="37"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="38"><i class="fas fa-heart"></i></span>
+            <img src="smartwatch.jpeg">
+            <h3>Smart watches</h3>
+            <p class="price">Rs.10499</p>
+            <button data-id="38"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="39"><i class="fas fa-heart"></i></span>
+            <img src="tablet.jpeg">
+            <h3>Trending Tablet</h3>
+            <p class="price">Rs.19999</p>
+            <button data-id="39"class="add-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <span class="wishlist"data-id="40"><i class="fas fa-heart"></i></span>
+            <img src="television.jpeg">
+            <h3>Top Television</h3>
+            <p class="price">Rs.20499</p>
+            <button data-id="40"class="add-cart">Add to Cart</button>
+        </div>
+    </div>
+   </section>
+   <script>
+const userId = localStorage.getItem("user_id");
+
+
+function initWishlist() {
+    if (!userId) return;
+
+    const hearts = document.querySelectorAll(".wishlist");
+
+    hearts.forEach(heart => {
+        const productId = heart.getAttribute("data-id");
+
+        fetch(`http://localhost:3000/wishlist/check/${userId}/${productId}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.exists) {
+                heart.style.color = "red";
+            } else {
+                heart.style.color = "#999";
+            }
+        });
+    });
+}
+
+
+document.querySelectorAll(".wishlist").forEach(heart => {
+    heart.addEventListener("click", () => {
+
+        if (!userId) {
+            alert("Login first");
+            return;
+        }
+
+        const productId = heart.getAttribute("data-id");
+
+        
+        if (heart.style.color === "red") {
+
+            fetch("http://localhost:3000/wishlist/remove", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    product_id: productId
+                })
+            })
+            .then(res => res.json())
+            .then(() => {
+                heart.style.color = "#999";
+            });
+
+        } else {
+           
+            fetch("http://localhost:3000/wishlist/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    product_id: productId
+                })
+            })
+            .then(res => res.json())
+            .then(() => {
+                heart.style.color = "red";
+            });
+        }
+    });
+});
+
+initWishlist();
+
+document.querySelectorAll(".add-cart").forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        if (!userId) {
+            alert("Login first");
+            return;
+        }
+
+        const productId = btn.getAttribute("data-id");
+
+        fetch("http://localhost:3000/cart/add", {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({
+                user_id: userId,
+                product_id: productId
+            })
+        })
+        .then(res => res.json())
+        .then(() => alert("Added to Cart 🛒"));
+    });
+});
+</script>
+</body>
+</html>

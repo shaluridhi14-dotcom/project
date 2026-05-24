@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Success</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.box{
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    width:350px;
+}
+
+.icon{
+    font-size:60px;
+    color:green;
+    margin-bottom:15px;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+p{
+    color:#555;
+    margin-bottom:20px;
+}
+
+/* buttons */
+.btn{
+    display:block;
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.home-btn{
+    background:#02246e;
+    color:white;
+}
+.home-btn:hover{
+    background:#0f40aa;
+}
+
+.order-btn{
+    background:#28a745;
+    color:white;
+}
+.order-btn:hover{
+    background:#218838;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <div class="icon">✔</div>
+    <h1>Order Placed Successfully 🎉</h1>
+    <p>Your order has been placed and will be delivered soon.</p>
+
+    <button class="btn home-btn" onclick="goHome()">Go to Home</button>
+    <button class="btn order-btn" onclick="viewOrder()">View Orders</button>
+</div>
+
+<script>
+function goHome(){
+    window.location.href = "index.html";
+}
+
+function viewOrder(){
+     window.location.href = "orders.html";
+}
+</script>
+
+</body>
+</html>
