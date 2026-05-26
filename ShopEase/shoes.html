@@ -6,12 +6,20 @@
     <title>ShopEase.com/beauty&PersonalCare</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+         *{
+    margin:0;
+    padding:0;
+    border:border-box;
+    font-family: Arial;
+            }
          body{
             background-color: black;
         }
         .heading{
             margin-left: 480px;
             color: white;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
         .product-container{
              display:grid;
@@ -69,12 +77,218 @@
        .wishlist:hover{
         transform:scale(1.2);
        }
+          .navbar{
+                height: 70px;
+                background-color:#000000;
+                color:white;
+                display: flex;
+                justify-content:space-evenly;
+            }
+        .nav-logo{
+                height:80px;
+                width:100px;
+            }
+        .logo{
+            background-image: url("shopeaselogoo.jpeg");
+            height: 60px;
+            width:120px;
+            background-size: cover;
+            align-items:center; 
+        }
+        .border{
+            border:1px solid transparent;
+        }
+        .border:hover{
+            border:1px solid white;
+        }
+        .nav-address{
+            height:60px;
+        }
+        .add-first{
+            color:#cccccc;
+            font-size:0.85rem;
+            margin-left: 25px;
+            margin-top:10px;
+        }
+        .add-second{
+            font-size:1rem;
+            margin-left:5px;
+            align-items: center;
+            font-weight: bold;
+        }
+        .add-icon{
+            display: flex;
+            align-items:center;
+            margin-left:5px;
+        }
+        .nav-search{
+            display:flex;
+            margin-left:10px;
+        }
+        .search-input
+        {
+            width:500px;
+            height:35px;
+            font-size:18px;
+        margin-top:10px;
+        }
+        .search-input:hover{
+            border:2px solid orange;
+        }
+        .search-icon{
+        background-color: orange;
+        height:40px;
+        width:45px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius:5px;
+        margin-top:10px;
+        }
+        .search-icon:hover{
+            background-color: rgb(252, 185, 69);
+        }
+        .nav-signin{
+            border:1px solid transparent;
+        margin-top:10px;
+            height:50px;
+        }
+        .nav-signin:hover{
+            border:1px solid white;
+        }
+        .text-first{
+            font-size:18px;
+            font-weight: bold;
+        
+        }
+        .text-second:hover{
+            text-decoration-line:underline;
+        }
+        .text-second{
+            font-weight: bold;
+            font-size:14px;
+            text-decoration: none;
+            color: #ffffff;
+        }
+        .cart i{
+            margin-top:10px;
+            font-size:20px;
+            color:#ffffff;
+            
+        }
+        .cart{
+            font: size 20px;
+            font-weight:bold;
+            height:50px;
+        }
+        .panel{
+            height:40px;
+            background-color:#02246e;
+            align-items: center;
+            font-size:16px;
+            display: flex;
+        }
+        .panel-all
+        {
+            display: flex;
+            color:rgb(255, 255, 255);
+            padding-left:15px;
+            align-items: center;
+        }
+        .panel-all i{
+            padding-right:5px;
+        }
+        .panel-all a{
+            color:rgb(255, 255, 255);
+            align-items: center;
+            padding-left:5px;
+            text-decoration: none;
+        }
+        .panel-all a:hover{
+            text-decoration: underline;
+        }
+        .panel-options{
+            color:rgb(255, 255, 255);
+            display:flex;
+            padding: 10px;
+        }
+        .panel-options a{
+        padding-left:60px;
+        color:rgb(255, 255, 255);
+        font-size: 16px;
+        text-decoration: none;
+        }
+        .panel-options a:hover{
+            text-decoration: underline;
+        }
+        .panel-options i{
+            font-size:13px;
+            color:#ffffff;
+            padding:5px;
+            
+        }
     </style>
 </head>
 <body>
-   <section class="shop">
-     
-    <h1 class="heading">Our Shoes and Sandals</h1>
+        <header>
+    <div class="navbar">
+        <div class="nav-logo ">
+            <div class="logo border"></div>
+        </div>
+        <div class="nav-address border">
+            <p class="add-first">Deliver to</p>
+            <div class="add-icon">
+                <i class="fa-solid fa-location-dot"></i>
+                <p class="add-second">India</p>
+            </div>
+        </div>
+        <div class="nav-search">
+            <input placeholder="search ShopEase.com" class="search-input" type="text"id="searchInput">
+            <button class="search-icon" onclick="searchProducts()">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            
+        </div>
+            
+        <div class="nav-signin">
+                <p class="text-first" ><i class="fa-solid fa-user"></i></p>
+                <a class="text-second"href="register.html">Sign in</a>
+        </div>
+        <div class="nav-signin">
+                <p class="text-first"><i class="fa-solid fa-heart"></i></p>
+                <a class="text-second" href="wishlist.html">Wishlist</a>
+        </div>
+        <div class="nav-signin">
+            <p class="text-first"><i class="fa-solid fa-cart-shopping"></i></p>
+                <a class="text-second" href="cart.html">Cart</a>
+        </div>
+        <div class="nav-signin">
+                <p class="text-first"><i class="fa-solid fa-circle-user"></i></p>
+                <a class="text-second" href="profile.html">Profile</a>
+        </div>
+    </div>
+    <div id="results" class="searchbar" style="
+    display:none;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    padding:20px;">
+    </div>
+            
+    <div class="panel">
+        <div class="panel-all">
+            <a href="index.html"><i class="fa-solid fa-home"></i>home</a>
+        </div>
+        <div class="panel-options">
+            <a href="account.html"><i class="fa-solid fa-circle-user"></i>Create Account</a>
+            <a href="fashion.html"><i class="fa-solid fa-shirt"></i>Latest Fashion</a>
+            <a href="smartphone.html"><i class="fa-solid fa-tv"></i>Electronics</a>
+            <a href="jewellery.html"><i class="fa-solid fa-gem"></i>jewellery</a>
+            <a href="bags.html"><i class="fa-sharp fa-solid fa-bag-shopping"></i>Bags</a>
+            <a href="kitchen.html"><i class="fa-solid fa-kitchen-set"></i>Kitchenware</a>
+           <a href="contact.html"><i class="fa-solid fa-phone"></i>Contact us</a>
+        </div>
+    </div>
+        </header>
+   <section class="shop"> 
+    <h1 class="heading"></h1>
     <div class="product-container">
         <div class="product-card">
             <span class="wishlist"data-id="61"><i class="fas fa-heart"></i></span>
