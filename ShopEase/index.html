@@ -147,6 +147,7 @@
     </footer>
     <script src="config.js"></script>
     <script>
+        const userId = localStorage.getItem("user_id");
     function searchProducts(){
 
     const keyword = document.getElementById("searchInput").value;
@@ -179,6 +180,34 @@
             </div>
         `).join("");
 
+    });
+}
+function addToCart(id) {
+
+    if (!userId) {
+        alert("Please login first!");
+        window.location.href = "register.html";
+        return;
+    }
+
+    fetch(`${window.API_BASE_URL}/cart/add`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            user_id: userId,
+            product_id: id,
+            message: "Added to cart"
+        })
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Failed to add product");
+        alert("Added to Cart!");
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Unable to add product to cart.");
     });
 }
 </script>
