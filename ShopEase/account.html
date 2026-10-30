@@ -111,6 +111,7 @@
     <p class="extra-links">Already have an account? <a href="register.html">Login here</a></p>
     <p class="extra-links"><a href="index.html"class="home"> Back to Home</a></p>
 </div> 
+<script src="config.js"></script>
 <script>
     document.getElementById("form").addEventListener("submit",async(e)=>{
         e.preventDefault();
@@ -120,7 +121,7 @@
             mobile:document.getElementById("mobile").value,
             password:document.getElementById("password").value
         };
-        const res=await fetch("http://localhost:3000/register",{
+        const res=await fetch(`${window.API_BASE_URL}/register`,{
             method:"POST",
             headers: {
     "Content-Type": "application/json"

@@ -229,8 +229,8 @@
     </div>
  
 </div>
+<script src="config.js"></script>
 <script>
-
 // LOAD USER
 let user = JSON.parse(localStorage.getItem("user"));
 
@@ -313,7 +313,7 @@ function saveProfile() {
     formData.append("image", imageFile);
   }
 
-  fetch("http://localhost:3000/update-profile", {
+  fetch(`${window.API_BASE_URL}/update-profile`, {
     method: "POST",
     body: formData
   })

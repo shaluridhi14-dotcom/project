@@ -85,6 +85,7 @@ body{
 
 <div class="grid" id="wishlist"></div>
 
+<script src="config.js"></script>
 <script>
 const userId = localStorage.getItem("user_id");
 
@@ -93,7 +94,7 @@ if(!userId){
     window.location.href="login.html";
 }
 
-fetch(`http://localhost:3000/wishlist/${userId}`)
+fetch(`${window.API_BASE_URL}/wishlist/${userId}`)
 .then(res=>res.json())
 .then(data=>{
 
@@ -121,7 +122,7 @@ fetch(`http://localhost:3000/wishlist/${userId}`)
 
 function removeItem(id){
 
-    fetch("http://localhost:3000/wishlist/remove",{
+    fetch(`${window.API_BASE_URL}/wishlist/remove`,{
         method:"DELETE",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
@@ -134,7 +135,7 @@ function removeItem(id){
 
 function addtocart(id){
 
-    fetch("http://localhost:3000/cart/add",{
+   fetch(`${window.API_BASE_URL}/cart/add`,{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({

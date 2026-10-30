@@ -133,12 +133,12 @@ body{background:#e3e3e3;}
         <button class="more-btn" onclick="goShopping()">More</button>
     </div>
 </div>
-
+<script src="config.js"></script>
 <script>
 const userId = localStorage.getItem("user_id");
 
 function loadCart(){
-    fetch(`http://localhost:3000/cart/${userId}`)
+    fetch(`${window.API_BASE_URL}/cart/${userId}`)
     .then(res => res.json())
     .then(data => {
 
@@ -200,7 +200,7 @@ function loadCart(){
 
 
 function inc(id){
-    fetch("http://localhost:3000/cart/increase",{
+    fetch(`${window.API_BASE_URL}/cart/increase`,{
         method:"PUT",
         headers:{"Content-Type":"application/json"},
         body: JSON.stringify({user_id:userId, product_id:id})
@@ -209,7 +209,7 @@ function inc(id){
 
 
 function dec(id){
-    fetch("http://localhost:3000/cart/decrease",{
+   fetch(`${window.API_BASE_URL}/cart/decrease`,{
         method:"PUT",
         headers:{"Content-Type":"application/json"},
         body: JSON.stringify({user_id:userId, product_id:id})
@@ -218,7 +218,7 @@ function dec(id){
 
 // ❌
 function removeItem(id){
-    fetch("http://localhost:3000/cart/remove",{
+    fetch(`${window.API_BASE_URL}/cart/remove`,{
         method:"DELETE",
         headers:{"Content-Type":"application/json"},
         body: JSON.stringify({user_id:userId, product_id:id})

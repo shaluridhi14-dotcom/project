@@ -199,6 +199,7 @@ cursor: pointer; }
 <div class="footer">
   © 2026 ShopEase | We usually respond within 24 hours.
 </div>
+<script src="config.js"></script>
 <script>
 document.getElementById("feedbackForm").addEventListener("submit", async function(e) {
     e.preventDefault();
@@ -210,7 +211,7 @@ document.getElementById("feedbackForm").addEventListener("submit", async functio
         message: document.getElementById("message").value
     };
 
-    const res = await fetch("http://localhost:3000/submit-feedback", {
+    const res = await fetch(`${window.API_BASE_URL}/submit-feedback`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

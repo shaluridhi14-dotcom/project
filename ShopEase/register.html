@@ -107,7 +107,8 @@
         </div>
     </form>
     </div>
-    <script>
+    <script src="config.js"></script>
+<script>
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
   e.preventDefault();
@@ -115,7 +116,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const res = await fetch("http://localhost:3000/login", {
+  const res = await fetch(`${window.API_BASE_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

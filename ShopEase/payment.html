@@ -81,12 +81,13 @@ button{
 
 </div>
 
+<script src="config.js"></script>
 <script>
 const userId = localStorage.getItem("user_id");
 let userData = {}; // ✅ store user data
 
 // 🧾 LOAD CART
-fetch(`http://localhost:3000/cart/${userId}`)
+fetch(`${window.API_BASE_URL}/cart/${userId}`)
 .then(res=>res.json())
 .then(data=>{
     let total = 0;
@@ -106,7 +107,7 @@ fetch(`http://localhost:3000/cart/${userId}`)
 });
 
 // 👤 LOAD USER DETAILS
-fetch(`http://localhost:3000/user/${userId}`)
+fetch(`${window.API_BASE_URL}/user/${userId}`)
 .then(res=>res.json())
 .then(user=>{
     userData = user; // ✅ IMPORTANT FIX
@@ -136,7 +137,7 @@ function placeOrder(){
         return;
     }
 
-    fetch(`http://localhost:3000/cart/${userId}`)
+    fetch(`${window.API_BASE_URL}/cart/${userId}`)
     .then(res => res.json())
     .then(cartItems => {
 
@@ -157,7 +158,7 @@ function placeOrder(){
         });
 
         // ✅ PLACE ORDER
-        return fetch("http://localhost:3000/order", {
+        return fetch(`${window.API_BASE_URL}/order`, {
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body: JSON.stringify({
@@ -182,7 +183,7 @@ function placeOrder(){
         alert("Order placed successfully ✅");
 
         // ✅ CLEAR CART
-        return fetch(`http://localhost:3000/cart/clear/${userId}`, {
+        return fetch(`${window.API_BASE_URL}/cart/clear/${userId}`, {
             method:"DELETE"
         });
     })

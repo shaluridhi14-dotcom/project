@@ -365,7 +365,8 @@ text-decoration: none;
         </div>
     </div>
    </section>
-   <script>
+   <script src="config.js"></script>
+<script>
 const userId = localStorage.getItem("user_id");
 
 function initWishlist() {
@@ -376,7 +377,7 @@ function initWishlist() {
     hearts.forEach(heart => {
         const productId = heart.getAttribute("data-id");
 
-        fetch(`http://localhost:3000/wishlist/check/${userId}/${productId}`)
+        fetch(`${window.API_BASE_URL}/wishlist/check/${userId}/${productId}`)
         .then(res => res.json())
         .then(data => {
             if (data.exists) {
@@ -402,7 +403,7 @@ document.querySelectorAll(".wishlist").forEach(heart => {
         // already red → REMOVE
         if (heart.style.color === "red") {
 
-            fetch("http://localhost:3000/wishlist/remove", {
+            fetch(`${window.API_BASE_URL}/wishlist/remove`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -419,7 +420,7 @@ document.querySelectorAll(".wishlist").forEach(heart => {
 
         } else {
             // ADD
-            fetch("http://localhost:3000/wishlist/add", {
+            fetch(`${window.API_BASE_URL}/wishlist/add`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -449,7 +450,7 @@ document.querySelectorAll(".add-cart").forEach(btn => {
 
         const productId = btn.getAttribute("data-id");
 
-        fetch("http://localhost:3000/cart/add", {
+        fetch(`${window.API_BASE_URL}/cart/add`, {
             method: "POST",
             headers: {"Content-Type":"application/json"},
             body: JSON.stringify({

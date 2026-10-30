@@ -76,6 +76,7 @@ body{font-family:Arial;background:#f2f2f2;}
 <div class="home">
     <a onclick="home()">Go to Home</a>
 </div>
+<script src="config.js"></script>
 <script>
 
 const userId = localStorage.getItem("user_id");
@@ -86,7 +87,7 @@ if(!userId){
 }
 
 // LOAD ORDERS
-fetch(`http://localhost:3000/orders/${userId}`)
+fetch(`${window.API_BASE_URL}/orders/${userId}`)
 .then(res => res.json())
 .then(data => {
 
@@ -150,7 +151,7 @@ function viewItems(orderId){
         return;
     }
 
-    fetch(`http://localhost:3000/order-items/${orderId}`)
+    fetch(`${window.API_BASE_URL}/order-items/${orderId}`)
     .then(res => res.json())
     .then(items => {
 
