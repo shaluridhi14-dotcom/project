@@ -1,5 +1,12 @@
+const fs = require("node:fs");
+const path = require("node:path");
+const process = require("node:process");
 
-require("node:process").loadEnvFile();
+const envPath = path.join(__dirname, ".env");
+
+if (fs.existsSync(envPath)) {
+    process.loadEnvFile(envPath);
+}
 
 const mysql = require("mysql2");
 
