@@ -19,3 +19,5 @@ uploads/
 # System files
 .DS_Store
 Thumbs.db
+# SSL certificates
+*.pem
