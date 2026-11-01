@@ -128,3 +128,4 @@ router.get("/:user_id", (req, res) => {
         res.json(result);
     });
 });
+module.exports = router;
