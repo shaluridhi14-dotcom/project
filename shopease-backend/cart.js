@@ -13,10 +13,20 @@ router.post("/add", (req, res) => {
     ON DUPLICATE KEY UPDATE quantity = quantity + 1
     `;
 
-    db.query(sql, [user_id, product_id], (err) => {
-        if (err) return res.json({ error: err });
-        res.json({ message: "Added to cart" });
+   db.query(sql, [user_id, product_id], (err) => {
+    if (err) {
+        console.log("ADD TO CART ERROR:", err);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to add product"
+        });
+    }
+
+    res.json({
+        success: true,
+        message: "Added to cart"
     });
+});
 });
 
 
